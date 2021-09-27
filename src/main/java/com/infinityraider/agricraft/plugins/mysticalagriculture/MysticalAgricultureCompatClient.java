@@ -138,7 +138,9 @@ public class MysticalAgricultureCompatClient {
 
     @SuppressWarnings("deprecation")
     public static ICrop getCropFromPlantId(String plantId) {
-        String path = plantId.split(":")[1];
+        String[] pathArray = plantId.split(":");
+        if (pathArray.length < 2) return null;
+        String path = pathArray[1];
         // We assume the plant id is "<modid>:<resource>_plant"
         ResourceLocation location = new ResourceLocation(path.substring(0, path.length() - 6)); // remove the "_plant" suffix
         return MysticalAgricultureAPI.getCropRegistry().getCropById(location);
